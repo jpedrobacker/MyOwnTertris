@@ -8,9 +8,15 @@
 # include <sys/time.h>
 # include <ncurses.h>
 
-# define ROWS 20
-# define COLS 15
+# define ROWS 21
+# define COLS 16
 # define TRUE 1
 # define FALSE 0
+
+struct board
+{
+	char umBoard[COLS][ROWS];
+	char umLines;
+};
 
 #endif
