@@ -19,18 +19,20 @@ typedef struct
 	int width, row, col;
 } Shape;
 
+//Universal variables
 char Table[ROWS][COLS] = {0};
 int	score = 0;
 char GameOn = TRUE;
 Shape current;
 const Shape ShapesArr[7] =
 {
-	{(char *[]){(char []){0,1,1},(char []){1,1,0}, (char []){0,0,0}}, 3}, //S_shape
-    {(char *[]){(char []){1,1,0},(char []){0,1,1}, (char []){0,0,0}}, 3}, //Z_shape
-    {(char *[]){(char []){0,1,0},(char []){1,1,1}, (char []){0,0,0}}, 3}, //T_shape
-    {(char *[]){(char []){0,0,1},(char []){1,1,1}, (char []){0,0,0}}, 3}, //L_shape
-    {(char *[]){(char []){1,0,0},(char []){1,1,1}, (char []){0,0,0}}, 3}, //ML_shape
-    {(char *[]){(char []){1,1},(char []){1,1}}, 2},                       //SQ_shape
+	{(char *[]){(char []){0,1,1}, (char []){1,1,0}, (char []){0,0,0}}, 3}, //S
+	{(char *[]){(char []){1,1,0}, (char []){0,1,1}, (char []){0,0,0}}, 3}, //Z
+	{(char *[]){(char []){0,1,0}, (char []){1,1,1}, (char []){0,0,0}}, 3}, //T
+	{(char *[]){(char []){0,0,1}, (char []){1,1,1}, (char []){0,0,0}}, 3}, //L
+	{(char *[]){(char []){1,0,0}, (char []){1,1,1}, (char []){0,0,0}}, 3}, //ML
+	{(char *[]){(char []){1,1}, (char []){1,1}}, 2}, //SQ_shape
+	{(char *[]){(char []){0,0,0,0}, (char []){1,1,1,1}, (char []){0,0,0,0}, (char []){0,0,0,0}}, 4} // |
 };
 
 //functions

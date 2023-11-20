@@ -38,10 +38,10 @@ int		CurrentPosition(Shape shape)
 
 void	RandomizeShape()//Update current Shape
 {
-	Shape new_shape = CopyShape(ShapesArr[rand()%6]);
-
+	Shape new_shape = CopyShape(ShapesArr[rand()%7]);
 	new_shape.col = rand()%(COLS-new_shape.width+1);
 	new_shape.row = 0;
+	
 	Deleteshape(current);
 	current = new_shape;
 }
@@ -97,5 +97,5 @@ void	MoveCurrentPiece(int key)
 
 int		GameTimeUpadate()
 {
-	
+
 }

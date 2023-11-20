@@ -22,12 +22,13 @@ typedef struct {
 Shape current;
 
 const Shape ShapesArray[7]= {
-	{(char *[]){(char []){0,1,1},(char []){1,1,0}, (char []){0,0,0}}, 3},                           //S shape
-	{(char *[]){(char []){1,1,0},(char []){0,1,1}, (char []){0,0,0}}, 3},                           //Z shape
-	{(char *[]){(char []){0,1,0},(char []){1,1,1}, (char []){0,0,0}}, 3},                           //T shape
-	{(char *[]){(char []){0,0,1},(char []){1,1,1}, (char []){0,0,0}}, 3},                           //L shape
-	{(char *[]){(char []){1,0,0},(char []){1,1,1}, (char []){0,0,0}}, 3},                           //flipped L shape
-	{(char *[]){(char []){1,1},(char []){1,1}}, 2},                                                 //square shape
+	{(char *[]){(char []){0,1,1}, (char []){1,1,0}, (char []){0,0,0}}, 3}, //S
+	{(char *[]){(char []){1,1,0}, (char []){0,1,1}, (char []){0,0,0}}, 3}, //Z
+	{(char *[]){(char []){0,1,0}, (char []){1,1,1}, (char []){0,0,0}}, 3}, //T
+	{(char *[]){(char []){0,0,1}, (char []){1,1,1}, (char []){0,0,0}}, 3}, //L
+	{(char *[]){(char []){1,0,0}, (char []){1,1,1}, (char []){0,0,0}}, 3}, //ML
+	{(char *[]){(char []){1,1}, (char []){1,1}}, 2}, //SQ_shape
+	{(char *[]){(char []){0,0,0,0}, (char []){1,1,1,1}, (char []){0,0,0,0}, (char []){0,0,0,0}}, 4}
 
 };
 
@@ -75,10 +76,10 @@ int CheckPosition(Shape shape){ //Check the position of the copied shape
 }
 
 void SetNewRandomShape(){ //updates [current] with new shape
-	Shape new_shape = CopyShape(ShapesArray[rand()%6]);
-
+	Shape new_shape = CopyShape(ShapesArray[rand()%7]);
     new_shape.col = rand()%(COLS-new_shape.width+1);
     new_shape.row = 0;
+	
     DeleteShape(current);
 	current = new_shape;
 	if(!CheckPosition(current)){
