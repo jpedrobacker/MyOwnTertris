@@ -13,6 +13,29 @@ const Shape ShapesArr[7] =
     {(char *[]){(char []){1,1},(char []){1,1}}, 2},                            //SQ_shape
 };
 
+void	print_board()
+{
+	int row = 0;
+	int col = 0;
+
+	while (row <= ROWS)
+	{
+		while(col <= COLS)
+		{
+			if (col == 0 || col == COLS)
+				printw("|");
+			else if (row == ROWS)
+				printw("*");
+			else
+				printw(" ");
+			col++;
+		}
+		printw("\n");
+		row++;
+	}
+	printw("\nScore: %d\n", score);
+}
+
 Shape CopyShape(Shape shape)
 {
 	Shape new_shape = shape;
@@ -43,29 +66,6 @@ void	deleteshape(Shape shape)
 		i++;
 	}
 	free(shape.array);
-}
-
-void	print_board()
-{
-	int row = 0;
-	int col = 0;
-
-	while (row <= ROWS)
-	{
-		while(col <= COLS)
-		{
-			if (col == 0 || col == COLS)
-				printw("|");
-			else if (row == ROWS)
-				printw("*");
-			else
-				printw(" ");
-			col++;
-		}
-		printw("\n");
-		row++;
-	}
-	printw("\nScore: %d\n", score);
 }
 
 int main(void)
