@@ -13,10 +13,10 @@
 # define TRUE 1
 # define FALSE 0
 
-struct board
+typedef struct
 {
-	char umBoard[COLS][ROWS];
-	char umLines;
-};
+	char **array;
+	int width, row, col;
+} Shape;
 
 #endif

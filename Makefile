@@ -1,5 +1,7 @@
-tetris: del
-		gcc tetris.c -o tetris
+game:
+	gcc tetris.c -lncurses -o tetris
 
 del:
 	rm tetris
+
+regame: del game
