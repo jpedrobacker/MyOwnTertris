@@ -17,12 +17,16 @@ typedef struct
 {
 	char **array;
 	int width, row, col;
-} Shape;
+}Shape;
+
+struct timeval before_now, now;
 
 //Universal variables
 char Table[ROWS][COLS] = {0};
 int	score = 0;
 char GameOn = TRUE;
+suseconds_t timer = 400000; // decrease this to make it faster
+int decrease = 1000;
 Shape current;
 
 //Shapes
@@ -38,7 +42,7 @@ const Shape ShapesArr[7] =
 };
 
 //functions
-Shape	CopyShape(Shape shape);
+Shape	NewShape(Shape shape);
 void	Deleteshape(Shape current);
 int		CurrentPosition(Shape shape);
 void	RandomizeShape();

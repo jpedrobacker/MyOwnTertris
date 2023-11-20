@@ -1,5 +1,5 @@
 game:
-	gcc tetris.c -lncurses -o tetris
+	gcc tetris.c -lncurses -o tetrisTester
 
 del:
 	rm tetris
