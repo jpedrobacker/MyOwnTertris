@@ -2,6 +2,7 @@
 
 int	score = 0;
 char GameOn = TRUE;
+Shape current;
 const Shape ShapesArr[7] =
 {
 	{(char *[]){(char []){0,1,1},(char []){1,1,0}, (char []){0,0,0}}, 3},      //S_shape
@@ -12,11 +13,46 @@ const Shape ShapesArr[7] =
     {(char *[]){(char []){1,1},(char []){1,1}}, 2},                            //SQ_shape
 };
 
+Shape CopyShape(Shape shape)
+{
+	Shape new_shape = shape;
+	char **copyshape = shape.array;
+	new_shape.array = (char**)malloc(new_shape.width * sizeof(char *));
+	int i = 0;
+	int j = 0;
+
+	while (i < new_shape.width)
+	{
+		new_shape.array[i] = (char *)malloc(new_shape.width * sizeof(char));
+		while (j < new_shape.width)
+		{
+			new_shape.array[i][j] = copyshape[i][j];
+			j++;
+		}
+		i++;
+	}
+	return (new_shape);
+}
+
+void	deleteshape(Shape shape)
+{
+	int i = 0;
+	while (i < shape.width)
+	{
+		free(shape.array[i]);
+		i++;
+	}
+	free(shape.array);
+}
+
 void	print_board()
 {
-	for(int row = 0; row <= ROWS; ++row)
+	int row = 0;
+	int col = 0;
+
+	while (row <= ROWS)
 	{
-		for(int col = 0; col <= COLS; ++col)
+		while(col <= COLS)
 		{
 			if (col == 0 || col == COLS)
 				printw("|");
@@ -24,8 +60,10 @@ void	print_board()
 				printw("*");
 			else
 				printw(" ");
+			col++;
 		}
 		printw("\n");
+		row++;
 	}
 	printw("\nScore: %d\n", score);
 }
