@@ -24,6 +24,8 @@ char Table[ROWS][COLS] = {0};
 int	score = 0;
 char GameOn = TRUE;
 Shape current;
+
+//Shapes
 const Shape ShapesArr[7] =
 {
 	{(char *[]){(char []){0,1,1}, (char []){1,1,0}, (char []){0,0,0}}, 3}, //S
