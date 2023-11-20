@@ -1,117 +1,101 @@
 #include "tetris.h"
 
-char Table[ROWS][COLS] = {0};
-int	score = 0;
-char GameOn = TRUE;
-Shape current;
-const Shape ShapesArr[7] =
-{
-	{(char *[]){(char []){0,1,1},(char []){1,1,0}, (char []){0,0,0}}, 3},      //S_shape
-    {(char *[]){(char []){1,1,0},(char []){0,1,1}, (char []){0,0,0}}, 3},      //Z_shape
-    {(char *[]){(char []){0,1,0},(char []){1,1,1}, (char []){0,0,0}}, 3},      //T_shape
-    {(char *[]){(char []){0,0,1},(char []){1,1,1}, (char []){0,0,0}}, 3},      //L_shape
-    {(char *[]){(char []){1,0,0},(char []){1,1,1}, (char []){0,0,0}}, 3},      //ML_shape
-    {(char *[]){(char []){1,1},(char []){1,1}}, 2},                            //SQ_shape
-};
-
 Shape CopyShape(Shape shape)
 {
 	Shape new_shape = shape;
 	char **copyshape = shape.array;
 	new_shape.array = (char**)malloc(new_shape.width * sizeof(char *));
-	int i = 0;
-	int j = 0;
+	int i = -1;
+	int j;
 
-	while (i < new_shape.width)
+	while (++i < new_shape.width)
 	{
 		new_shape.array[i] = (char *)malloc(new_shape.width * sizeof(char));
-		while (j < new_shape.width)
+		j = -1;
+		while (++j < new_shape.width)
 		{
 			new_shape.array[i][j] = copyshape[i][j];
-			j++;
 		}
-		i++;
 	}
 	return (new_shape);
 }
 
-void	deleteshape(Shape shape)
+void	Deleteshape(Shape current)//Delete current shape
 {
 	int i = 0;
-	while (i < shape.width)
+	while (i < current.width)
 	{
-		free(shape.array[i]);
+		free(current.array[i]);
 		i++;
 	}
-	free(shape.array);
+	free(current.array);
 }
 
-void	RandomShape(Shape shape)
+int		CurrentPosition(Shape shape)
 {
 
 }
 
-void	print_board()
+void	RandomizeShape()//Update current Shape
+{
+	Shape new_shape = CopyShape(ShapesArr[rand()%6]);
+
+	new_shape.col = rand()%(COLS-new_shape.width+1);
+	new_shape.row = 0;
+	Deleteshape(current);
+	current = new_shape;
+}
+
+void	RotateShape(Shape shape)
+{
+
+}
+
+void	UpdateTable()
+{
+
+}
+
+void	RemoveRows()
+{
+
+}
+
+void	Print_grid()
 {
 	char buffer[ROWS][COLS] = {0};
-	int i = 0;
-	int j = 0;
-
-	while(i < current.width)
+	int i = -1;
+	int j;
+	while(++i < current.width)
 	{
-		while (j < current.width)
+		j = -1;
+		while (++j < current.width)
 		{
 			if (current.array[i][j])
 				buffer[current.row+i][current.col+j] = current.array[i][j];
-			j++;
 		}
-		i++;
 	}
 	clear();
-	i = 0;
-	while (i < COLS-9)
+	i = -1;
+	while (++i < ROWS)
 	{
-		printw(" ");
-		i++;
-	}
-	i = 0;
-	j = 0;
-	while (i < ROWS)
-	{
-		while(j < COLS)
+		j = -1;
+		while(++j < COLS)
 		{
-			printw("%c ", (Table[i][j] + buffer[i][j] ? '#': '.'));
-			j++;
+			if (j == 0 || j == COLS)
+				printf("|");
+			printw("%c ", (Table[i][j] + buffer[i][j])? 'O': ' ');
 		}
 		printw("\n");
 	}
 	printw("\nScore: %d\n", score);
-	/*while (row <= ROWS)
-	{
-		while(col <= COLS)
-		{
-			if (col == 0 || col == COLS)
-				printw("|");
-			else if (row == ROWS)
-				printw("*");
-			else
-				printw(" ");
-			col++;
-		}
-		printw("\n");
-		row++;
-	}
-	printw("\nScore: %d\n", score);*/
+}
+void	MoveCurrentPiece(int key)
+{
+
 }
 
-int main(void)
+int		GameTimeUpadate()
 {
-	score = 0;
-	int c;
-
-	initscr();
-	print_board();
-	endwin();
-
-	return (0);
+	
 }
