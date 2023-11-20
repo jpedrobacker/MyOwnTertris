@@ -35,7 +35,7 @@ const Shape ShapesArr[7] =
 
 //functions
 
-Shape CopyShape(Shape shape);
+Shape	CopyShape(Shape shape);
 void	Deleteshape(Shape current);
 int		CurrentPosition(Shape shape);
 void	RandomizeShape();
