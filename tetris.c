@@ -82,11 +82,11 @@ void	Print_grid()
 		j = -1;
 		while(++j < COLS)
 		{
-			printf("%c ", (Table[i][j] + buffer[i][j])? 'O': '.');
+			printw("%c ", (Table[i][j] + buffer[i][j])? 'O': '.');
 		}
-		printf("\n");
+		printw("\n");
 	}
-	printf("\nScore: %d\n", score);
+	printw("\nScore: %d\n", score);
 }
 void	MoveCurrentPiece(int key)
 {
