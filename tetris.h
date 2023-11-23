@@ -28,6 +28,7 @@ char GameOn = TRUE;
 suseconds_t timer = 400000; // decrease this to make it faster
 int decrease = 1000;
 Shape current;
+Shape hold;
 
 //Shapes
 const Shape ShapesArr[7] =
@@ -43,6 +44,7 @@ const Shape ShapesArr[7] =
 
 //functions
 Shape	NewShape(Shape shape);
+void	HoldShape(Shape to_hold);
 void	Deleteshape(Shape current);
 int		CurrentPosition(Shape shape);
 void	RandomizeShape();

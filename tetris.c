@@ -70,6 +70,11 @@ void	RotateShape(Shape shape)
 
 }
 
+void	HoldShape(Shape to_hold)
+{
+	
+}
+
 void	UpdateTable()
 {
 	int i, j;
@@ -132,21 +137,23 @@ void	MoveCurrentPiece(int key)
 			RandomizeShape();
 		}
 		break;
-	case 'd':
+	case 'd'://Move Shape Right
 		temp.col++;
 		if (CurrentPosition(temp))
 			current.col++;
 		break;
-	case 'a':
+	case 'a'://Move Shape Left
 		temp.col--;
 		if(CurrentPosition(temp))
 			current.col--;
 		break;
-	case 'w':
+	case 'w': //Rotate current Shape
 		RotateShape(temp);
 		if(CurrentPosition(temp))
 			RotateShape(current);
 		break;
+	case 'l': //Hold Shape
+		HoldShape(temp);
 	}
 	Deleteshape(temp);
 	Print_grid();
