@@ -33,7 +33,24 @@ void	Deleteshape(Shape current)//Delete current shape
 
 int		CurrentPosition(Shape shape)
 {
-
+	char **array = shape.array;
+	int i, j;
+	i = -1;
+	while(++i < shape.width)
+	{
+		j = -1;
+		while (++j < shape.width)
+		{
+			if (shape.col+j < 0 || shape.col+j >= COLS || shape.row+i >= ROWS)
+			{
+				if (array[i][j])
+					return (FALSE);
+			}
+			else if (Table[shape.row+i][shape.col+j] && array[i][j])
+				return (FALSE);
+		}
+	}
+	return (TRUE);
 }
 
 void	RandomizeShape()//Update current Shape
@@ -44,6 +61,8 @@ void	RandomizeShape()//Update current Shape
 
 	Deleteshape(current);
 	current = new_shape;
+	if(!CurrentPosition(current))// Se a peça chegar no topo, o jogo acaba
+		GameOn = FALSE;
 }
 
 void	RotateShape(Shape shape)
@@ -53,7 +72,17 @@ void	RotateShape(Shape shape)
 
 void	UpdateTable()
 {
-
+	int i, j;
+	i = -1;
+	while (++i < current.width)
+	{
+		j = -1;
+		while (++j < current.width)
+		{
+			if(current.array[i][j])
+				Table[current.row+i][current.col+j] = current.array[i][j];
+		}
+	}
 }
 
 void	RemoveRows()
@@ -82,7 +111,7 @@ void	Print_grid()
 		j = -1;
 		while(++j < COLS)
 		{
-			printw("%c ", (Table[i][j] + buffer[i][j])? 'O': '.');
+			printw("%c ", (Table[i][j] + buffer[i][j])? 'O': '.');//Printw usado para printar dinamicamente
 		}
 		printw("\n");
 	}
@@ -90,12 +119,42 @@ void	Print_grid()
 }
 void	MoveCurrentPiece(int key)
 {
-
+	Shape temp = NewShape(current);
+	switch (key)
+	{
+	case 's':
+		temp.row++;
+		if(CurrentPosition(temp))
+			current.row++;
+		else
+		{
+			UpdateTable();
+			RandomizeShape();
+		}
+		break;
+	case 'd':
+		temp.col++;
+		if (CurrentPosition(temp))
+			current.col++;
+		break;
+	case 'a':
+		temp.col--;
+		if(CurrentPosition(temp))
+			current.col--;
+		break;
+	case 'w':
+		RotateShape(temp);
+		if(CurrentPosition(temp))
+			RotateShape(current);
+		break;
+	}
+	Deleteshape(temp);
+	Print_grid();
 }
 
 int		GameTimeUpdate()
 {
-	return ((suseconds_t)(now.tv_sec*1000000 + now.tv_usec) - ((suseconds_t)before_now.tv_sec*1000000 + before_now.tv_usec)) > timer;
+	return ((suseconds_t)(now.tv_sec*1000000 + now.tv_usec) -((suseconds_t)before_now.tv_sec*1000000 + before_now.tv_usec)) > timer;
 }
 
 int main(void)
@@ -103,10 +162,7 @@ int main(void)
 	srand(time(0));
 	score = 0;
 	int c;
-	int i;
-	int j;
-
-	/*initscr();
+	initscr();
 	gettimeofday(&before_now, NULL);
 	timeout(1);
 	RandomizeShape();
@@ -114,16 +170,18 @@ int main(void)
 	while(GameOn)
 	{
 		if ((c = getch()) != ERR);
-			//MoveCurrentPiece(c);
+			MoveCurrentPiece(c);
 		gettimeofday(&now, NULL);
 		if (GameTimeUpdate())
 		{
-			//MoveCurrentPiece('s');
+			MoveCurrentPiece('s');
 			gettimeofday(&before_now, NULL);
 		}
 	}
 	Deleteshape(current);
-	endwin();*/
+	endwin();
+	int i;
+	int j;
 	i = -1;
 	while (++i < ROWS)
 	{
