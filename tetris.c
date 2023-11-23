@@ -33,7 +33,7 @@ void	Deleteshape(Shape current)//Delete current shape
 
 int		CurrentPosition(Shape shape)
 {
-	char **array = shape.array;
+	char **arr = shape.array;
 	int i, j;
 	i = -1;
 	while(++i < shape.width)
@@ -43,10 +43,10 @@ int		CurrentPosition(Shape shape)
 		{
 			if (shape.col+j < 0 || shape.col+j >= COLS || shape.row+i >= ROWS)
 			{
-				if (array[i][j])
+				if (arr[i][j])
 					return (FALSE);
 			}
-			else if (Table[shape.row+i][shape.col+j] && array[i][j])
+			else if (Table[shape.row+i][shape.col+j] && arr[i][j])
 				return (FALSE);
 		}
 	}
@@ -61,7 +61,7 @@ void	RandomizeShape()//Update current Shape
 
 	Deleteshape(current);
 	current = new_shape;
-	if(!CurrentPosition(current))// Se a peça chegar no topo, o jogo acaba
+	if(!CurrentPosition(current))
 		GameOn = FALSE;
 }
 
@@ -111,7 +111,7 @@ void	Print_grid()
 		j = -1;
 		while(++j < COLS)
 		{
-			printw("%c ", (Table[i][j] + buffer[i][j])? 'O': '.');//Printw usado para printar dinamicamente
+			printw("%c ", (Table[i][j] + buffer[i][j])? 'O': '.');
 		}
 		printw("\n");
 	}
