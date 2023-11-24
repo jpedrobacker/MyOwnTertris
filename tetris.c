@@ -67,7 +67,21 @@ void	RandomizeShape()//Update current Shape
 
 void	RotateShape(Shape shape)
 {
-
+	Shape temp = NewShape(shape);
+	int i, j, k, width;
+	width = shape.width;
+	i = -1;
+	while (++i < width)
+	{
+		j = -1;
+		k = width - 1;
+		while (++j < width)
+		{
+			shape.array[i][j] = temp.array[k][i];
+			k--;
+		}
+	}
+	Deleteshape(temp);
 }
 
 void	HoldShape(Shape to_hold)
