@@ -9,7 +9,7 @@
 # include <ncurses.h>
 
 # define ROWS 21
-# define COLS 16
+# define COLS 11
 # define TRUE 1
 # define FALSE 0
 
